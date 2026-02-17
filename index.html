@@ -1,137 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SVA – Scalable Verification Architecture</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scalable Verification Architecture</title>
 
-<style>
-:root {
-  --apple-white: #F9FAFB;
-  --executive-grey: #0A0B0D;
-  --accent-blue: #3B82F6;
-  --text-dark: #111827;
-  --text-muted: #6B7280;
-}
+  <style>
+    :root {
+      --apple-white: #f5f5f7;
+      --executive-grey: #1d1d1f;
+      --soft-grey: #86868b;
+      --border-grey: #d2d2d7;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
 
-body {
-  background: var(--apple-white);
-  color: var(--text-dark);
-}
+    body {
+      background: var(--executive-grey);
+      color: white;
+      line-height: 1.6;
+    }
 
-/* Hero */
-.hero {
-  padding: 120px 20px;
-  text-align: center;
-  background: var(--apple-white);
-}
+    /* ===== HERO WHITE DOCUMENT ===== */
 
-.hero h1 {
-  font-size: 42px;
-  font-weight: 700;
-  letter-spacing: -1px;
-}
+    .hero {
+      background: var(--apple-white);
+      color: var(--executive-grey);
+      padding: 100px 20px;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.25);
+    }
 
-.hero p {
-  margin-top: 20px;
-  color: var(--text-muted);
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
 
-/* Executive Section */
-.infrastructure {
-  background: var(--executive-grey);
-  color: white;
-  padding: 120px 20px;
-  position: relative;
-}
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: var(--soft-grey);
+    }
 
-/* NVIDIA glow */
-.infrastructure::before {
-  content: "";
-  position: absolute;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(59,130,246,0.03) 0%, transparent 70%);
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+    /* ===== DARK INFRA SECTION ===== */
 
-.infrastructure h2 {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 60px;
-}
+    .infrastructure {
+      padding: 120px 20px;
+      text-align: center;
+      background: linear-gradient(
+        to bottom,
+        #1d1d1f,
+        #111
+      );
+    }
 
-.terminal {
-  max-width: 800px;
-  margin: auto;
-  background: #111827;
-  padding: 40px;
-  font-family: monospace;
-  font-size: 14px;
-  border-radius: 4px;
-  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.5);
-}
+    .terminal {
+      background: #0f172a;
+      padding: 40px;
+      max-width: 700px;
+      margin: 40px auto 0;
+      border-radius: 12px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+      font-family: "SF Mono", monospace;
+      font-size: 14px;
+      text-align: left;
+      color: #7dd3fc;
+    }
 
-.cta {
-  text-align: center;
-  padding: 100px 20px;
-}
+    .terminal p {
+      margin-bottom: 8px;
+    }
 
-.button {
-  display: inline-block;
-  padding: 16px 40px;
-  background: #111827;
-  color: white;
-  text-decoration: none;
-  letter-spacing: 2px;
-  font-size: 12px;
-  text-transform: uppercase;
-  transition: 0.3s;
-}
+    /* ===== CTA BUTTON ===== */
 
-.button:hover {
-  background: black;
-}
-</style>
+    .cta {
+      margin-top: 50px;
+    }
+
+    .cta button {
+      padding: 14px 32px;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-grey);
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cta button:hover {
+      background: white;
+      color: black;
+    }
+
+    /* ===== MODAL ===== */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal {
+      background: var(--apple-white);
+      color: var(--executive-grey);
+      width: 90%;
+      max-width: 500px;
+      padding: 50px;
+      border-radius: 16px;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.4);
+    }
+
+    .modal h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .modal label {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--soft-grey);
+      display: block;
+      margin-top: 20px;
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: 1px solid var(--border-grey);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .modal button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      background: var(--executive-grey);
+      color: white;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .modal button:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
 
 <body>
 
-<section class="hero">
-  <h1>Scalable Verification Architecture</h1>
-  <p>
-    Institutional-grade deterministic verification interface.
-    Built for banks, hospitals, and regulated entities requiring
-    mathematical proof of compliance.
-  </p>
-</section>
+  <section class="hero">
+    <h1>Scalable Verification Architecture</h1>
+    <p>
+      Institutional-grade deterministic verification interface.
+      Built for banks, hospitals, and regulated entities requiring
+      mathematical proof of compliance.
+    </p>
+  </section>
 
-<section class="infrastructure">
-  <h2>Integrity Terminal</h2>
-  <div class="terminal">
-    > Initializing SVA Protocol...<br>
-    > Hashing compliance matrix...<br>
-    > Deterministic handshake confirmed.<br>
-    > Security Level: EAL7_COMPLIANT<br>
-    > Node access ready.
+  <section class="infrastructure">
+    <h2>Integrity Terminal</h2>
+
+    <div class="terminal">
+      <p>> Initializing SVA Protocol...</p>
+      <p>> Hashing compliance matrix...</p>
+      <p>> Deterministic handshake confirmed.</p>
+      <p>> Security Level: EAL7_COMPLIANT</p>
+      <p>> Node access ready.</p>
+    </div>
+
+    <div class="cta">
+      <button onclick="openModal()">Request Node Access</button>
+    </div>
+  </section>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <h2>Institutional Access Request</h2>
+
+      <label>Institution Name</label>
+      <input type="text" />
+
+      <label>Compliance Officer Email</label>
+      <input type="email" />
+
+      <button onclick="closeModal()">Initialize Provisioning</button>
+    </div>
   </div>
-</section>
 
-<section class="cta">
-  <a href="#" class="button">Initialize Provisioning</a>
-</section>
+  <script>
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
