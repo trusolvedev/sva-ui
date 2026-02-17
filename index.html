@@ -3,167 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scalable Verification Architecture</title>
+  <title>SVA — Scalable Verification Architecture</title>
 
   <style>
-    :root {
-      --apple-white: #f5f5f7;
-      --executive-grey: #1d1d1f;
-      --soft-grey: #86868b;
-      --border-grey: #d2d2d7;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-        "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
     body {
-      background: var(--executive-grey);
-      color: white;
-      line-height: 1.6;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #F5F5F7;
+      color: #111;
+      scroll-behavior: smooth;
     }
-
-    /* ===== HERO WHITE DOCUMENT ===== */
 
     .hero {
-      background: var(--apple-white);
-      color: var(--executive-grey);
       padding: 100px 20px;
       text-align: center;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.25);
+      background: #FFFFFF;
     }
 
     .hero h1 {
-      font-size: 48px;
-      font-weight: 600;
+      font-size: 42px;
       letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .hero p {
-      max-width: 700px;
+      max-width: 600px;
       margin: 0 auto;
+      color: #666;
       font-size: 18px;
-      color: var(--soft-grey);
     }
 
-    /* ===== DARK INFRA SECTION ===== */
-
-    .infrastructure {
+    .terminal-section {
+      background: #0A0F1C;
+      color: #C9D1D9;
       padding: 120px 20px;
       text-align: center;
-      background: linear-gradient(
-        to bottom,
-        #1d1d1f,
-        #111
-      );
+      position: relative;
+      overflow: hidden;
     }
 
-    .terminal {
-      background: #0f172a;
+    /* NVIDIA ambient glow */
+    .terminal-section::before {
+      content: "";
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(59,130,246,0.03) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .terminal-box {
+      background: #111827;
       padding: 40px;
-      max-width: 700px;
-      margin: 40px auto 0;
       border-radius: 12px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-      font-family: "SF Mono", monospace;
-      font-size: 14px;
+      display: inline-block;
       text-align: left;
-      color: #7dd3fc;
-    }
-
-    .terminal p {
-      margin-bottom: 8px;
-    }
-
-    /* ===== CTA BUTTON ===== */
-
-    .cta {
-      margin-top: 50px;
-    }
-
-    .cta button {
-      padding: 14px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      font-family: monospace;
       font-size: 14px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 1px solid var(--border-grey);
-      background: transparent;
+      position: relative;
+    }
+
+    .cta-section {
+      padding: 100px 20px;
+      text-align: center;
+      background: #FFFFFF;
+    }
+
+    .cta-button {
+      padding: 16px 28px;
+      background: #111;
       color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .cta button:hover {
-      background: white;
-      color: black;
-    }
-
-    /* ===== MODAL ===== */
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal {
-      background: var(--apple-white);
-      color: var(--executive-grey);
-      width: 90%;
-      max-width: 500px;
-      padding: 50px;
-      border-radius: 16px;
-      box-shadow: 0 50px 100px rgba(0,0,0,0.4);
-    }
-
-    .modal h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      letter-spacing: -0.01em;
-    }
-
-    .modal label {
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--soft-grey);
-      display: block;
-      margin-top: 20px;
-    }
-
-    .modal input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border: 1px solid var(--border-grey);
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    .modal button {
-      margin-top: 30px;
-      width: 100%;
-      padding: 14px;
-      border: none;
-      background: var(--executive-grey);
-      color: white;
-      font-size: 14px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .modal button:hover {
-      opacity: 0.9;
+    .cta-button:hover {
+      background: #333;
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -179,45 +103,24 @@
     </p>
   </section>
 
-  <section class="infrastructure">
+  <section class="terminal-section">
     <h2>Integrity Terminal</h2>
 
-    <div class="terminal">
-      <p>> Initializing SVA Protocol...</p>
-      <p>> Hashing compliance matrix...</p>
-      <p>> Deterministic handshake confirmed.</p>
-      <p>> Security Level: EAL7_COMPLIANT</p>
-      <p>> Node access ready.</p>
-    </div>
-
-    <div class="cta">
-      <button onclick="openModal()">Request Node Access</button>
+    <div class="terminal-box">
+      > Initializing SVA Protocol...<br/>
+      > Hashing compliance matrix...<br/>
+      > Deterministic handshake confirmed.<br/>
+      > Security Level: EAL7_COMPLIANT<br/>
+      > Node access ready.
     </div>
   </section>
 
-  <div class="modal-overlay" id="modal">
-    <div class="modal">
-      <h2>Institutional Access Request</h2>
-
-      <label>Institution Name</label>
-      <input type="text" />
-
-      <label>Compliance Officer Email</label>
-      <input type="email" />
-
-      <button onclick="closeModal()">Initialize Provisioning</button>
-    </div>
-  </div>
-
-  <script>
-    function openModal() {
-      document.getElementById("modal").style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
-    }
-  </script>
+  <section class="cta-section">
+    <h2>Institutional Access Portal</h2>
+    <p>Provision secure verification node access.</p>
+    <br/>
+    <button class="cta-button">Initialize Provisioning</button>
+  </section>
 
 </body>
 </html>
